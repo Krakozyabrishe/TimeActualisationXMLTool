@@ -23,6 +23,7 @@ namespace TimeActualisationXMLTool
         public MainWindow()
         {
             InitializeComponent();
+            //Start
         }
     }
 }
