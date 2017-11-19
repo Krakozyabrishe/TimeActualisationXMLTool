@@ -3,10 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:TimeActualisationXMLTool"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="Time Actualisation XML Tool" Height="110"  Width="450"
+        Loaded="Window_Loaded">
+    <StackPanel Orientation="Horizontal">
+        <Button Width="105" Margin="20" Padding="5" Name="BTNSetFolder" Click="BTNSetFolder_Click">Path...</Button>
+        <xctk:DateTimeUpDown Width="105" Name="setDateTimeUpDown" Format="Custom" FormatString="yyMMdd-HHmm"  AllowSpin="True" Margin="20" Padding="5"/>
+        <Button Width="105" Margin="20" Padding="5" Name="BTNStart" Click="BTNStart_Click">Start</Button>
+    </StackPanel>
 </Window>
