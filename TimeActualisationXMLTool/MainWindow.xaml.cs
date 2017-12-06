@@ -69,6 +69,31 @@ namespace TimeActualisationXMLTool
                         File.Delete(s);
 
                     System.Windows.Forms.MessageBox.Show($"Removed files:{xmlFileNameListFiltered.Count}", "Non-actual files removed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    //Create list that contains existed XML files.
+                    List<String> xmlExistedFileNameList = Directory.GetFiles(settedPath, "*.xml").ToList()
+                        .Select(s => new string( Path.GetFileName(s).ToCharArray().Reverse().ToArray()))
+                        .Select(s => s.Substring(4,s.ToString().IndexOfAny("!_".ToCharArray())-4))
+                        .Select(s => new string(s.ToCharArray().Reverse().ToArray()))
+                        .ToList<string>();
+
+                    int countSkippedFiles = 0;
+
+                    StreamWriter sw = new StreamWriter(settedPath+"\\ListOfTasks.txt", false);
+
+                    //save task's numbers to TXT file
+                    foreach (string s in xmlExistedFileNameList)
+                    {
+                        if ((s != "") && (s.Count(x => Char.IsDigit(x)) == s.Length))
+                            sw.WriteLine("WGSSA-" + s);
+                        else
+                            countSkippedFiles++;
+                    }
+                    sw.WriteLine("Skipped files: " + countSkippedFiles.ToString());
+
+                    sw.Close();
+
+                    System.Diagnostics.Process.Start(settedPath + "\\ListOfTasks.txt");
                 }
                 catch (Exception ex) // lazy exception
                 {
